@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conscientização Contra o Cyberbullying | Por Alexandre</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                            neon: '#00f0ff',
+                            accent: '#a855f7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        signature: ['Dancing Script', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Libraries (jQuery, GSAP, ScrollTrigger) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Custom Styling & Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00f0ff 0%, #6366f1 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3));
+            padding: 1px;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-accent flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-white block leading-none">CyberSafe</span>
+                    <span class="text-xs text-brand-neon font-medium">por Alexandre</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-brand-neon transition-colors">O que é</a>
+                <a href="#examples" class="text-slate-300 hover:text-brand-neon transition-colors">Exemplos</a>
+                <a href="#prevention" class="text-slate-300 hover:text-brand-neon transition-colors">Prevenção</a>
+                <a href="#quiz" class="text-slate-300 hover:text-brand-neon transition-colors">Quiz</a>
+                <a href="#signature" class="px-4 py-2 rounded-full bg-brand-600/20 text-brand-neon border border-brand-500/30 hover:bg-brand-600 hover:text-white transition-all duration-300">Assinar Manifesto</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-6 py-4 space-y-4">
+            <a href="#about" class="block text-slate-300 hover:text-brand-neon py-2">O que é</a>
+            <a href="#examples" class="block text-slate-300 hover:text-brand-neon py-2">Exemplos</a>
+            <a href="#prevention" class="block text-slate-300 hover:text-brand-neon py-2">Prevenção</a>
+            <a href="#quiz" class="block text-slate-300 hover:text-brand-neon py-2">Quiz</a>
+            <a href="#signature" class="block text-center py-3 rounded-xl bg-brand-600 text-white font-semibold">Assinar Manifesto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-brand-accent/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center z-10">
+            <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-brand-500/30 text-xs sm:text-sm text-brand-neon mb-8 shadow-inner">
+                <span class="flex h-2 w-2 rounded-full bg-brand-neon animate-pulse"></span>
+                Iniciativa Social de Conscientização Digital
+            </div>
+
+            <h1 class="hero-title text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                A empatia também deve ser <br class="hidden sm:inline" />
+                <span class="gradient-text">virótica no mundo digital.</span>
+            </h1>
+
+            <p class="hero-sub text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
+                Bem-vindo! Eu sou o <strong class="text-white">Alexandre</strong> e criei este espaço para juntos combatermos o cyberbullying. A internet deve ser um lugar de respeito, aprendizado e conexão positiva.
+            </p>
+
+            <div class="hero-buttons flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#examples" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-eye"></i> Entenda os Impactos
+                </a>
+                <a href="#signature" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-nib text-brand-neon"></i> Assinar Compromisso
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="hero-stats grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 pt-12 border-t border-slate-800/80">
+                <div class="p-4 rounded-2xl glass-card">
+                    <p class="text-3xl font-extrabold text-brand-neon mb-1 counter" data-target="37">0%</p>
+                    <p class="text-xs sm:text-sm text-slate-400">dos jovens já sofreram intimidação online</p>
+                </div>
+                <div class="p-4 rounded-2xl glass-card">
+                    <p class="text-3xl font-extrabold text-brand-accent mb-1 counter" data-target="60">0%</p>
+                    <p class="text-xs sm:text-sm text-slate-400">já presenciaram episódios de assédio virtual</p>
+                </div>
+                <div class="p-4 rounded-2xl glass-card">
+                    <p class="text-3xl font-extrabold text-emerald-400 mb-1 counter" data-target="100">0%</p>
+                    <p class="text-xs sm:text-sm text-slate-400">Prevenível com conscientização e empatia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is Cyberbullying Section -->
+    <section id="about" class="py-24 relative bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="about-text space-y-6">
+                    <span class="text-brand-neon font-semibold text-sm tracking-wider uppercase">Entendendo a Ameaça</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">O que é Cyberbullying?</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        Cyberbullying é a prática de violentar, intimidar, humilhar ou perseguir alguém por meio de tecnologias digitais. Ocorre frequentemente em redes sociais, plataformas de mensagens, jogos online e telefones celulares.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Diferente do bullying tradicional, a agressão digital **não tem limites geográficos e ocorre 24 horas por dia**, deixando sequelas emocionais profundas como ansiedade, depressão e isolamento social.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-start gap-3">
+                            <i class="fa-solid fa-infinity text-brand-neon text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Aumento de Escala</h4>
+                                <p class="text-xs text-slate-400">Uma publicação difamatória pode ser compartilhada por milhares de pessoas em segundos.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-start gap-3">
+                            <i class="fa-solid fa-mask text-brand-accent text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Falso Anonimato</h4>
+                                <p class="text-xs text-slate-400">Agressores se escondem atrás de telas e perfis falsos, aumentando a agressividade.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic/Visual element -->
+                <div class="about-visual relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square rounded-3xl bg-gradient-to-tr from-slate-900 via-brand-900/40 to-slate-900 p-8 border border-brand-500/20 glass-card flex flex-col justify-between overflow-hidden shadow-2xl">
+                        <div class="flex justify-between items-center border-b border-slate-700/60 pb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="text-xs text-slate-500 font-mono">alerta_de_segurança.exe</span>
+                        </div>
+
+                        <div class="my-auto space-y-4">
+                            <div class="bg-red-500/10 border border-red-500/30 p-4 rounded-xl text-xs text-red-300 flex items-start gap-3 animate-pulse">
+                                <i class="fa-solid fa-triangle-exclamation text-lg text-red-400"></i>
+                                <div>
+                                    <strong class="block font-bold">Aviso de Impacto Psicológico</strong>
+                                    Comentários ofensivos recorrentes desencadeiam danos graves à autoimagem da vítima.
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/90 p-4 rounded-xl text-xs text-slate-300 border border-slate-700 flex items-center justify-between">
+                                <span>Status da Comunidade:</span>
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold">Respeito Ativo</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-4 border-t border-slate-700/60">
+                            <p class="text-xs text-slate-400 italic">"Palavras no ambiente virtual têm o mesmo peso da vida real."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-neon font-semibold text-sm tracking-wider uppercase">Casos Comuns</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Exemplos Práticos de Cyberbullying</h2>
+                <p class="text-slate-400 mt-4 text-base">
+                    Reconhecer as formas como o assédio digital se manifesta é o primeiro passo para bloqueá-lo e denunciá-lo.
+                </p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" id="example-filters">
+                <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium bg-brand-600 text-white transition-all" data-filter="all">Todos</button>
+                <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-filter="exposicao">Exposição e Vazamento</button>
+                <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-filter="falsificacao">Perfis Falsos</button>
+                <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-filter="hostilidades">Hostilidade Direta</button>
+            </div>
+
+            <!-- Examples Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="examples-grid">
+                
+                <!-- Card 1 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="exposicao">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-red-400">Doxxing</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Vazamento de Dados Pessoais</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Publicar documentos, endereço, telefone ou fotos íntimas sem consentimento com o objetivo de expor, constranger ou ameaçar a vítima.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Gravidade: Alta</span>
+                        <span class="text-red-400">Crime Digital</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="falsificacao">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Impersonation</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Perfis Falsos e Falsificação</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Criar contas 'fake' usando a foto e nome de outra pessoa para denegrir sua imagem, postar conteúdo preconceituoso ou manchar relacionamentos.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Frequência: Muito Alta</span>
+                        <span class="text-purple-400">Falsa Identidade</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="hostilidades">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Flaming & Harassment</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Ataques Coletivos e Trolling</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Enviar mensagens de ódio agressivas, ofensas em fóruns de jogos, criar memes pejorativos repetidamente contra o mesmo indivíduo.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Frequência: Alta</span>
+                        <span class="text-amber-400">Assédio Moral</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="exposicao">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-blue-400">Outing</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Revelação de Segredos</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Compartilhar informações confidenciais ou orientações pessoais sem autorização prévia em grupos para ridicularizar a pessoa.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Violação de Privacidade</span>
+                        <span class="text-blue-400">Exposição Indevida</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="hostilidades">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">Exclusão Digital</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Isolamento Intencional</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Excluir propositalmente um membro de grupos de mensagens da turma ou do trabalho, bloqueando a participação social do indivíduo.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Impacto Psicológico</span>
+                        <span class="text-emerald-400">Exclusão Social</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="example-card glass-card rounded-2xl p-6 hover:-translate-y-2 transition-all duration-300 border border-slate-800 hover:border-brand-500/50 group" data-category="falsificacao">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-pink-400">Cyberstalking</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Perseguição Sistemática</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Monitorar excessivamente as atividades online de alguém, enviando mensagens indesejadas constantes que causam medo e desconforto.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <span>Gravidade: Alta</span>
+                        <span class="text-pink-400">Invasão Continuada</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention & Action Plan (Accordion Section) -->
+    <section id="prevention" class="py-24 bg-slate-900/60 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-neon font-semibold text-sm tracking-wider uppercase">Plano de Ação</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">O que Fazer se Acontecer com Você ou Alguém?</h2>
+                <p class="text-slate-400 mt-4">
+                    Passos práticos e imediatos compilados por Alexandre para garantir segurança digital e psicológica.
+                </p>
+            </div>
+
+            <!-- Interactive Accordion via jQuery -->
+            <div class="space-y-4" id="accordion-prevention">
+                
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="accordion-header w-full p-6 text-left flex justify-between items-center text-white font-semibold text-lg hover:bg-slate-800/50 transition-colors">
+                        <span class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-neon flex items-center justify-center text-sm">1</span>
+                            Não Responda e Não Reaja Impulsivamente
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50">
+                        O agressor geralmente busca uma reação emocional. Evite retribuir insultos ou demonstrar raiva publicamente, pois isso costuma alimentar a continuidade das provocações.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="accordion-header w-full p-6 text-left flex justify-between items-center text-white font-semibold text-lg hover:bg-slate-800/50 transition-colors">
+                        <span class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-neon flex items-center justify-center text-sm">2</span>
+                            Guarde Todas as Evidências
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50">
+                        Tire **capturas de tela (screenshots)** das conversas, fotos, comentários e perfis dos agressores. Certifique-se de salvar os links (URLs) das páginas e datas/horários. Essas provas são fundamentais para denúncias legais.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="accordion-item glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="accordion-header w-full p-6 text-left flex justify-between items-center text-white font-semibold text-lg hover:bg-slate-800/50 transition-colors">
+                        <span class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-neon flex items-center justify-center text-sm">3</span>
+                            Bloqueie o Agressor e Denuncie na Plataforma
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50">
+                        Utilize as ferramentas de bloqueio e report das redes sociais (Instagram, WhatsApp, TikTok, Discord, etc.). As plataformas têm diretrizes estritas contra assédio e podem remover contas infratoras.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="accordion-item glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="accordion-header w-full p-6 text-left flex justify-between items-center text-white font-semibold text-lg hover:bg-slate-800/50 transition-colors">
+                        <span class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-neon flex items-center justify-center text-sm">4</span>
+                            Procure Ajuda de Pessoas de Confiança e Autoridades
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50">
+                        Converse com familiares, professores, psicólogos ou amigos próximos. Se houver ameaças graves, difamação ou divulgação de conteúdo íntimo, busque uma Delegacia de Crimes Cibernéticos ou faça um Boletim de Ocorrência Online.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Emergency Channels Banner -->
+            <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-brand-900/60 to-slate-900 border border-brand-500/30 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full bg-brand-neon/10 text-brand-neon flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg">Canais de Ajuda Gratuita</h4>
+                        <p class="text-slate-400 text-sm">Canaise de apoio como a SaferNet oferecem auxílio anônimo e seguro.</p>
+                    </div>
+                </div>
+                <a href="https://new.safernet.org.br/helpline" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-brand-neon text-slate-950 font-bold hover:bg-cyan-300 transition-colors whitespace-nowrap">
+                    Acessar SaferNet Brasil
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Quiz Section -->
+    <section id="quiz" class="py-24 relative">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <span class="text-brand-neon font-semibold text-sm tracking-wider uppercase">Interação</span>
+                <h2 class="text-3xl font-bold text-white mt-2">Teste Seus Conhecimentos</h2>
+                <p class="text-slate-400 text-sm mt-2">Responda rapidamente e descubra se você sabe reagir ao cyberbullying!</p>
+            </div>
+
+            <div id="quiz-container" class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
+                <div id="quiz-question-box">
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="quiz-progress" class="text-xs font-semibold text-brand-neon uppercase tracking-wider">Questão 1 de 3</span>
+                        <span id="quiz-score" class="text-xs text-slate-400">Pontuação: 0</span>
+                    </div>
+                    <h3 id="quiz-question" class="text-lg sm:text-xl font-bold text-white mb-6">
+                        Carregando Pergunta...
+                    </h3>
+                    <div id="quiz-options" class="space-y-3">
+                        <!-- Options injected via JS -->
+                    </div>
+                </div>
+
+                <div id="quiz-result" class="hidden text-center py-8">
+                    <div class="w-16 h-16 rounded-full bg-brand-500/20 text-brand-neon flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Quiz Concluído!</h3>
+                    <p id="quiz-final-text" class="text-slate-300 text-sm mb-6"></p>
+                    <button id="quiz-restart" class="px-6 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-500 transition-all">
+                        Refazer Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature & Commitment Section -->
+    <section id="signature" class="py-24 bg-slate-900/80 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-neon font-semibold text-sm tracking-wider uppercase">Manifesto por Alexandre</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Assine a Corrente de Respeito</h2>
+                <p class="text-slate-400 mt-4 text-sm max-w-xl mx-auto">
+                    Faça o seu compromisso digital. Alexandre iniciou este movimento e te convida a colocar sua assinatura pela paz e empatia na internet.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                
+                <!-- Alexandre's Signature Card -->
+                <div class="glass-card p-8 rounded-2xl border border-brand-500/30 relative overflow-hidden flex flex-col justify-between h-full">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl"></div>
+                    
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-600/30 flex items-center justify-center text-brand-neon font-bold">
+                                A
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-base">Iniciativa Idealizada Por</h4>
+                                <p class="text-xs text-slate-400">Alexandre — Criador da Campanha</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed italic mb-8">
+                            "Acredito que a tecnologia deve servir para unir pessoas, não para ferir. Deixo minha assinatura como promessa de combater o assédio e apoiar quem precisa."
+                        </p>
+                    </div>
+
+                    <div class="border-t border-slate-800 pt-6">
+                        <span class="text-xs text-slate-500 block mb-2">Assinatura Digital Oficial:</span>
+                        <!-- Alexandre Animated Written Signature -->
+                        <div class="font-signature text-4xl text-brand-neon tracking-wide py-2 select-none" id="alexandre-signature">
+                            Alexandre
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive User Signature Box -->
+                <div class="glass-card p-8 rounded-2xl border border-slate-800">
+                    <h4 class="text-white font-bold text-lg mb-2">Adicione Sua Assinatura</h4>
+                    <p class="text-xs text-slate-400 mb-6">Desenhe sua assinatura ou rubrica no quadro abaixo para aderir ao pacto.</p>
+
+                    <!-- Canvas -->
+                    <div class="relative bg-slate-950 rounded-xl border border-slate-700/80 overflow-hidden mb-4">
+                        <canvas id="signature-pad" class="w-full h-40 cursor-crosshair touch-none"></canvas>
+                        <div id="canvas-placeholder" class="absolute inset-0 flex items-center justify-center text-slate-600 text-xs pointer-events-none">
+                            Desenhe com o mouse ou toque aqui
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3">
+                        <button id="clear-signature" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-medium transition-all">
+                            Limpar
+                        </button>
+                        <button id="submit-signature" class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold text-xs shadow-lg shadow-brand-500/20 hover:scale-105 transition-all">
+                            Confirmar Apoio
+                        </button>
+                    </div>
+
+                    <!-- Pledge counter -->
+                    <div class="mt-6 pt-4 border-t border-slate-800 text-center">
+                        <p class="text-xs text-slate-400">
+                            Já somos <span id="pledge-count" class="font-bold text-brand-neon text-sm">1.248</span> pessoas comprometidas com esta causa.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white text-sm font-bold">
+                    A
+                </div>
+                <span class="font-semibold text-white">Projeto Conscientização | Alexandre</span>
+            </div>
+
+            <p class="text-xs text-slate-500 text-center">
+                &copy; 2026 Alexandre. Todos os direitos reservados. Juntos por uma internet mais humana e segura.
+            </p>
+
+            <div class="flex items-center gap-4 text-slate-400 text-lg">
+                <a href="#" class="hover:text-brand-neon transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-brand-neon transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-brand-neon transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Toast Message Container -->
+    <div id="toast-message" class="fixed bottom-6 right-6 px-6 py-4 rounded-xl bg-slate-900 border border-brand-500 text-white text-sm shadow-2xl transition-all duration-300 transform translate-y-24 opacity-0 z-50 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-brand-neon text-lg"></i>
+        <span id="toast-text">Assinatura registrada com sucesso!</span>
+    </div>
+
+    <!-- MAIN JAVASCRIPT & GSAP LOGIC -->
+    <script>
+        $(document).ready(function () {
+            
+            // -------------------------------------------------------------
+            // 1. GSAP ANIMATIONS & SCROLL TRIGGER
+            // -------------------------------------------------------------
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Animation Timeline
+            const heroTl = gsap.timeline();
+            heroTl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" })
+                  .from(".hero-title", { y: 30, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.4")
+                  .from(".hero-sub", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
+                  .from(".hero-buttons", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
+                  .from(".hero-stats", { opacity: 0, duration: 1 }, "-=0.4");
+
+            // Alexandre Signature Pulse
+            gsap.to("#alexandre-signature", {
+                textShadow: "0px 0px 15px rgba(0,240,255,0.6)",
+                repeat: -1,
+                yoyo: true,
+                duration: 2,
+                ease: "sine.inOut"
+            });
+
+            // Counters Animation on Scroll
+            $('.counter').each(function () {
+                const $this = $(this);
+                const target = $this.data('target');
+
+                ScrollTrigger.create({
+                    trigger: $this[0],
+                    start: "top 85%",
+                    onEnter: () => {
+                        gsap.to({ val: 0 }, {
+                            val: target,
+                            duration: 2,
+                            ease: "power2.out",
+                            onUpdate: function () {
+                                $this.text(Math.floor(this.targets()[0].val) + "%");
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Section Headers Reveal
+            gsap.utils.toArray('section').forEach(section => {
+                gsap.from(section.querySelectorAll('h2, .about-text, .example-card'), {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%"
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                });
+            });
+
+            // -------------------------------------------------------------
+            // 2. JQUERY INTERACTION & FILTERS
+            // -------------------------------------------------------------
+
+            // Mobile Menu Toggle
+            $('#mobile-menu-btn').on('click', function () {
+                $('#mobile-menu').slideToggle(200);
+            });
+
+            // Category Filter for Examples
+            $('.filter-btn').on('click', function () {
+                $('.filter-btn').removeClass('active bg-brand-600 text-white').addClass('bg-slate-800 text-slate-300');
+                $(this).addClass('active bg-brand-600 text-white').removeClass('bg-slate-800 text-slate-300');
+
+                const filter = $(this).data('filter');
+
+                if (filter === 'all') {
+                    $('.example-card').fadeIn(300);
+                } else {
+                    $('.example-card').hide();
+                    $(`.example-card[data-category="${filter}"]`).fadeIn(300);
+                }
+            });
+
+            // Accordion Interaction
+            $('.accordion-header').on('click', function () {
+                const $content = $(this).next('.accordion-content');
+                const $icon = $(this).find('i');
+
+                // Close other accordions
+                $('.accordion-content').not($content).slideUp(200);
+                $('.accordion-header i').not($icon).removeClass('rotate-180');
+
+                // Toggle current
+                $content.slideToggle(200);
+                $icon.toggleClass('rotate-180');
+            });
+
+            // -------------------------------------------------------------
+            // 3. QUIZ LOGIC (JQUERY)
+            // -------------------------------------------------------------
+            const quizData = [
+                {
+                    question: "O que você deve fazer PRIMEIRO ao receber ofensas graves em uma rede social?",
+                    options: [
+                        "Responder à altura para se defender imediatamente.",
+                        "Tirar capturas de tela (evidências) e denunciar na plataforma.",
+                        "Excluir sua conta e não contar a ninguém."
+                    ],
+                    correct: 1,
+                    explanation: "Guardar as evidências antes de reportar ou bloquear é crucial caso precise acionar as autoridades."
+                },
+                {
+                    question: "Criar um perfil utilizando a foto e nome de um colega sem autorização é considerado:",
+                    options: [
+                        "Apenas uma brincadeira sem gravidade.",
+                        "Falsa identidade (Impersonation) e prática ilícita.",
+                        "Uma forma válida de se expressar anonimamente."
+                    ],
+                    correct: 1,
+                    explanation: "Falsificar a identidade de alguém pode causar sérios danos à reputação e constitui crime."
+                },
+                {
+                    question: "Como você pode agir ativamente para interromper o Cyberbullying?",
+                    options: [
+                        "Compartilhando a publicação com amigos para rirem juntos.",
+                        "Ignorando completamente a situação, pois não é com você.",
+                        "Apoiando a vítima no privado, não alimentando o post e denunciando."
+                    ],
+                    correct: 2,
+                    explanation: "A empatia ativa e a não replicação do conteúdo ofensivo quebram o ciclo do assédio."
+                }
+            ];
+
+            let currentQuestion = 0;
+            let score = 0;
+
+            function loadQuestion() {
+                const q = quizData[currentQuestion];
+                $('#quiz-progress').text(`Questão ${currentQuestion + 1} de ${quizData.length}`);
+                $('#quiz-question').text(q.question);
+                $('#quiz-options').empty();
+
+                q.options.forEach((opt, idx) => {
+                    $('#quiz-options').append(`
+                        <button class="quiz-opt-btn w-full text-left p-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 text-sm transition-all" data-idx="${idx}">
+                            ${opt}
+                        </button>
+                    `);
+                });
+            }
+
+            $(document).on('click', '.quiz-opt-btn', function () {
+                const selected = $(this).data('idx');
+                const q = quizData[currentQuestion];
+
+                if (selected === q.correct) {
+                    score++;
+                    $(this).addClass('bg-emerald-600/30 border-emerald-500 text-emerald-300');
+                } else {
+                    $(this).addClass('bg-red-600/30 border-red-500 text-red-300');
+                }
+
+                $('#quiz-score').text(`Pontuação: ${score}`);
+                $('.quiz-opt-btn').prop('disabled', true);
+
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < quizData.length) {
+                        loadQuestion();
+                    } else {
+                        showQuizResults();
+                    }
+                }, 1200);
+            });
+
+            function showQuizResults() {
+                $('#quiz-question-box').addClass('hidden');
+                $('#quiz-result').removeClass('hidden');
+                $('#quiz-final-text').html(`Você acertou <strong>${score}</strong> de <strong>${quizData.length}</strong> perguntas! <br/>Obrigado por se conscientizar.`);
+            }
+
+            $('#quiz-restart').on('click', function () {
+                currentQuestion = 0;
+                score = 0;
+                $('#quiz-score').text(`Pontuação: 0`);
+                $('#quiz-result').addClass('hidden');
+                $('#quiz-question-box').removeClass('hidden');
+                loadQuestion();
+            });
+
+            loadQuestion();
+
+            // -------------------------------------------------------------
+            // 4. INTERACTIVE SIGNATURE CANVAS
+            // -------------------------------------------------------------
+            const canvas = document.getElementById('signature-pad');
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let hasSigned = false;
+
+            // Set Canvas Resolution
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                ctx.strokeStyle = '#00f0ff';
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+            }
+            resizeCanvas();
+            $(window).on('resize', resizeCanvas);
+
+            function getCoordinates(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            function startDrawing(e) {
+                isDrawing = true;
+                hasSigned = true;
+                $('#canvas-placeholder').fadeOut(100);
+                const coords = getCoordinates(e);
+                ctx.beginPath();
+                ctx.moveTo(coords.x, coords.y);
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                const coords = getCoordinates(e);
+                ctx.lineTo(coords.x, coords.y);
+                ctx.stroke();
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+            }
+
+            // Mouse Events
+            $(canvas).on('mousedown', startDrawing);
+            $(canvas).on('mousemove', draw);
+            $(window).on('mouseup', stopDrawing);
+
+            // Touch Events for Mobile
+            canvas.addEventListener('touchstart', startDrawing, { passive: true });
+            canvas.addEventListener('touchmove', draw, { passive: true });
+            canvas.addEventListener('touchend', stopDrawing);
+
+            // Clear Canvas
+            $('#clear-signature').on('click', function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hasSigned = false;
+                $('#canvas-placeholder').fadeIn(100);
+            });
+
+            // Submit Signature
+            let totalPledges = 1248;
+            $('#submit-signature').on('click', function () {
+                if (!hasSigned) {
+                    showToast("Por favor, desenhe sua assinatura no quadro antes de confirmar.");
+                    return;
+                }
+
+                totalPledges++;
+                $('#pledge-count').text(totalPledges.toLocaleString('pt-BR'));
+                showToast("Sua assinatura foi registrada com sucesso no manifesto do Alexandre!");
+                
+                // Clear and reset canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hasSigned = false;
+                $('#canvas-placeholder').fadeIn(100);
+            });
+
+            // Toast Notification Helper
+            function showToast(message) {
+                $('#toast-text').text(message);
+                $('#toast-message').removeClass('translate-y-24 opacity-0').addClass('translate-y-0 opacity-100');
+
+                setTimeout(() => {
+                    $('#toast-message').removeClass('translate-y-0 opacity-100').addClass('translate-y-24 opacity-0');
+                }, 3500);
+            }
+
+        });
+    </script>
+</body>
+</html>
